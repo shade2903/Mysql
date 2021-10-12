@@ -1,0 +1,24 @@
+use test2_db;
+
+Delimiter $$
+
+-- создание процедуры
+create procedure getCarsReleased(yearFrom int, yearTo int)
+begin
+	select * from cars where year (relis_date) between yearFrom and yearTo;
+end
+$$
+
+-- создание фукции
+ create function calcByGender(gender varchar(20))
+ returns int
+ DETERMINISTIC
+ begin 
+	 declare num int default 0; 	 
+	 select count(*) into num
+	 
+	from owners  where owners.gender like gender;
+return num;
+ end
+
+ $$
