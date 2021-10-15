@@ -22,3 +22,13 @@ return num;
  end
 
  $$
+
+
+
+ -------------------
+ CREATE PROCEDURE test2_db.test(
+color varchar(36), out `count` int)
+begin
+	select count(*) into `count`
+    from cars where cars.color like `color`;
+END
