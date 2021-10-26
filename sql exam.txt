@@ -1,0 +1,34 @@
+use task;
+
+Delimiter $$
+
+create procedure getReleasedBook(yearFrom int, yaearTo int)
+begin 
+	select name as language_name, author_name, creation_date, biography
+	from programming_languages inner join authors  on id = language_id 
+	where year(creation_date) between yearFrom and yaearTo order by creation_date desc;
+end 
+$$
+
+----------------------------------------------------------
+use task;
+
+Delimiter $$
+
+create function addWorker(employed INT, tipsDate DATETIME, tipsAmount INT)
+returns int 
+DETERMINISTIC
+begin 
+	declare sumAmount int default 0;
+	
+insert into tips(employee_id, `date`, amount)
+values (employed, tipsDate, tipsAmount);
+
+
+select sum(amount) into sumAmount
+from tips
+where employee_id = employed;
+return sumAmount;
+	
+end
+$$
